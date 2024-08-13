@@ -1,7 +1,10 @@
+#[must_use]
 pub fn encode(source: &str) -> String {
     let mut dest: Vec<String> = vec![];
     let mut count: i64 = 0;
-    let Some(mut current) = source.chars().next() else { return String::default() };
+    let Some(mut current) = source.chars().next() else {
+        return String::default();
+    };
     for char in source.chars() {
         if char == current {
             count += 1;
@@ -16,12 +19,13 @@ pub fn encode(source: &str) -> String {
 }
 
 fn push_count(dest: &mut Vec<String>, count: i64, current: char) {
-    if (count > 1) {
+    if count > 1 {
         dest.push(count.to_string());
     }
     dest.push(current.to_string());
 }
 
+#[must_use]
 pub fn decode(source: &str) -> String {
     let mut digits: Vec<char> = vec![];
     let mut dest: Vec<char> = vec![];
