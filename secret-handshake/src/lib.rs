@@ -1,20 +1,18 @@
 #[must_use]
 pub fn actions(n: u8) -> Vec<&'static str> {
-    let mut secret_handshake = vec![];
-    if n & 0b1 != 0 {
-        secret_handshake.push("wink");
+    const ACTION_COUNT: usize = 4;
+    let actions: [&str; ACTION_COUNT] = ["wink", "double blink", "close your eyes", "jump"];
+    let secret_handshake = actions
+        .into_iter()
+        .enumerate()
+        .filter_map(|(bit, action)| {
+            let bitmask = 1 << bit;
+            (n & bitmask != 0).then_some(action)
+        });
+
+    if n & (1 << ACTION_COUNT) == 0 {
+        secret_handshake.collect()
+    } else {
+        secret_handshake.rev().collect()
     }
-    if n & 0b10 != 0 {
-        secret_handshake.push("double blink");
-    }
-    if n & 0b100 != 0 {
-        secret_handshake.push("close your eyes");
-    }
-    if n & 0b1000 != 0 {
-        secret_handshake.push("jump");
-    }
-    if n & 0b1_0000 != 0 {
-        secret_handshake.reverse();
-    }
-    secret_handshake
 }
