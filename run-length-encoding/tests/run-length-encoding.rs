@@ -9,7 +9,6 @@ fn encode_empty_string() {
 }
 
 #[test]
-#[ignore]
 fn encode_single_characters_only_are_encoded_without_count() {
     let input = "XYZ";
     let output = rle::encode(input);
@@ -54,7 +53,6 @@ fn encode_lowercase_characters() {
 }
 
 #[test]
-#[ignore]
 fn decode_empty_string() {
     let input = "";
     let output = rle::decode(input);
@@ -63,7 +61,6 @@ fn decode_empty_string() {
 }
 
 #[test]
-#[ignore]
 fn decode_single_characters_only() {
     let input = "XYZ";
     let output = rle::decode(input);
@@ -108,7 +105,6 @@ fn decode_lowercase_string() {
 }
 
 #[test]
-#[ignore]
 fn consistency_encode_followed_by_decode_gives_original_string() {
     let input = "zzz ZZ  zZ";
     let output = rle::decode(&rle::encode(input));
