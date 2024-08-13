@@ -27,20 +27,13 @@ fn encode_char(dest: &mut Vec<String>, count: usize, char: char) {
 
 #[must_use]
 pub fn decode(source: &str) -> String {
-    let mut digits: Vec<char> = vec![];
-    let mut dest: Vec<String> = vec![];
-    for char in source.chars() {
-        match char {
-            '0'..='9' => {
-                digits.push(char);
-            }
-            letter => {
-                let count: String = digits.into_iter().collect();
-                let count: usize = count.parse().unwrap_or(1);
-                dest.push(letter.to_string().repeat(count));
-                digits = vec![];
-            }
-        }
-    }
-    dest.into_iter().collect()
+    let counts = source
+        .split(|chr: char| chr.is_alphabetic() || chr.is_whitespace())
+        .map(|num| num.parse::<usize>().unwrap_or(1));
+
+    let letters = source.matches(|chr: char| chr.is_alphabetic() || chr.is_whitespace());
+
+    let parsed = counts.zip(letters);
+
+    parsed.map(|(count, letter)| letter.repeat(count)).collect()
 }
