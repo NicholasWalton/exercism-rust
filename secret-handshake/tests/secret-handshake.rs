@@ -21,31 +21,26 @@ fn jump_for_1000() {
 }
 
 #[test]
-#[ignore]
 fn combine_two_actions() {
     assert_eq!(actions(3), vec!["wink", "double blink"])
 }
 
 #[test]
-#[ignore]
 fn reverse_two_actions() {
     assert_eq!(actions(19), vec!["double blink", "wink"])
 }
 
 #[test]
-#[ignore]
 fn reversing_one_action_gives_the_same_action() {
     assert_eq!(actions(24), vec!["jump"])
 }
 
 #[test]
-#[ignore]
 fn reversing_no_actions_still_gives_no_actions() {
     assert_eq!(actions(16), Vec::<&'static str>::new())
 }
 
 #[test]
-#[ignore]
 fn all_possible_actions() {
     assert_eq!(
         actions(15),
@@ -54,7 +49,6 @@ fn all_possible_actions() {
 }
 
 #[test]
-#[ignore]
 fn reverse_all_possible_actions() {
     assert_eq!(
         actions(31),
@@ -63,7 +57,6 @@ fn reverse_all_possible_actions() {
 }
 
 #[test]
-#[ignore]
 fn do_nothing_for_zero() {
     assert_eq!(actions(0), Vec::<&'static str>::new())
 }
