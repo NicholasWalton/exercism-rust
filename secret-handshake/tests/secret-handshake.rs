@@ -6,19 +6,16 @@ fn wink_for_1() {
 }
 
 #[test]
-#[ignore]
 fn double_blink_for_10() {
     assert_eq!(actions(2), vec!["double blink"])
 }
 
 #[test]
-#[ignore]
 fn close_your_eyes_for_100() {
     assert_eq!(actions(4), vec!["close your eyes"])
 }
 
 #[test]
-#[ignore]
 fn jump_for_1000() {
     assert_eq!(actions(8), vec!["jump"])
 }
