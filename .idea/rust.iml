@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="EMPTY_MODULE" version="4">
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/hello-world/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/hello-world/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/run-length-encoding/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/run-length-encoding/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/secret-handshake/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/secret-handshake/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/xorcism/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/xorcism/tests" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/hello-world/target" />
+      <excludeFolder url="file://$MODULE_DIR$/run-length-encoding/target" />
+      <excludeFolder url="file://$MODULE_DIR$/secret-handshake/target" />
+      <excludeFolder url="file://$MODULE_DIR$/xorcism/target" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
