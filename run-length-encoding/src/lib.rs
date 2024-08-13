@@ -1,34 +1,34 @@
 #[must_use]
 pub fn encode(source: &str) -> String {
     let mut dest: Vec<String> = vec![];
-    let mut count: i64 = 0;
-    let Some(mut current) = source.chars().next() else {
+    let mut count: usize = 0;
+    let Some(mut last_char) = source.chars().next() else {
         return String::default();
     };
-    for char in source.chars() {
-        if char == current {
+    for current_char in source.chars() {
+        if current_char == last_char {
             count += 1;
         } else {
-            push_count(&mut dest, count, current);
-            current = char;
+            encode_char(&mut dest, count, last_char);
+            last_char = current_char;
             count = 1;
         }
     }
-    push_count(&mut dest, count, current);
+    encode_char(&mut dest, count, last_char);
     dest.into_iter().collect()
 }
 
-fn push_count(dest: &mut Vec<String>, count: i64, current: char) {
+fn encode_char(dest: &mut Vec<String>, count: usize, char: char) {
     if count > 1 {
         dest.push(count.to_string());
     }
-    dest.push(current.to_string());
+    dest.push(char.to_string());
 }
 
 #[must_use]
 pub fn decode(source: &str) -> String {
     let mut digits: Vec<char> = vec![];
-    let mut dest: Vec<char> = vec![];
+    let mut dest: Vec<String> = vec![];
     for char in source.chars() {
         match char {
             '0'..='9' => {
@@ -36,10 +36,8 @@ pub fn decode(source: &str) -> String {
             }
             letter => {
                 let count: String = digits.into_iter().collect();
-                let count: i64 = count.parse().unwrap_or(1);
-                for _ in 0..count {
-                    dest.push(letter);
-                }
+                let count: usize = count.parse().unwrap_or(1);
+                dest.push(letter.to_string().repeat(count));
                 digits = vec![];
             }
         }
