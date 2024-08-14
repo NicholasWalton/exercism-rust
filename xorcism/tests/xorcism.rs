@@ -13,7 +13,6 @@ fn munge_in_place_identity() {
 }
 
 #[test]
-#[ignore]
 fn munge_in_place_roundtrip() {
     let mut xs1 = Xorcism::new(&[1, 2, 3, 4, 5]);
     let mut xs2 = Xorcism::new(&[1, 2, 3, 4, 5]);
@@ -27,7 +26,6 @@ fn munge_in_place_roundtrip() {
 }
 
 #[test]
-#[ignore]
 fn munge_in_place_stateful() {
     let mut xs = Xorcism::new(&[1, 2, 3, 4, 5]);
     let input = "This is super-secret, cutting edge encryption, folks.".as_bytes();
