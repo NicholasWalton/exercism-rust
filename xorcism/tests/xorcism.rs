@@ -52,7 +52,6 @@ fn munge_identity() {
 }
 
 #[test]
-#[ignore]
 fn statefulness() {
     // we expect Xorcism to be stateful: at the end of a munging run, the key has rotated.
     // this means that until the key has completely rotated around, equal inputs will produce
@@ -108,7 +107,6 @@ macro_rules! test_cases {
                 }
 
                 #[test]
-                #[ignore]
                 fn munges() {
                     let mut xorcism = Xorcism::new(KEY);
                     let result: Vec<u8> = xorcism.munge(INPUT.as_bytes()).collect();
@@ -133,7 +131,6 @@ macro_rules! test_cases {
                 use super::*;
 
                 #[test]
-                #[ignore]
                 fn munge_in_place() {
                     let key = KEY.as_bytes();
 
@@ -156,7 +153,6 @@ macro_rules! test_cases {
                 }
 
                 #[test]
-                #[ignore]
                 fn munges() {
                     let key = KEY.as_bytes();
                     let input = INPUT.as_bytes();
