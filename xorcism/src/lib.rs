@@ -32,10 +32,8 @@ impl<'a> Xorcism<'a> {
     ///
     /// Should accept anything which has a cheap conversion to a byte iterator.
     /// Shouldn't matter whether the byte iterator's values are owned or borrowed.
-    pub fn munge<Data>(&mut self, data: Data) -> impl Iterator<Item = u8> {
-        // let mut key = self.key.iter().cycle();
-        // data.into_iter().map(move |byte| byte ^ key.next().unwrap())
-        todo!();
-        std::iter::empty()
+    pub fn munge<'b>(&'b mut self, data: &'b [u8]) -> impl Iterator<Item = u8> + 'b {
+        // data.as_ref().to_owned().iter().map(move |byte: &u8| *byte ^ self.key.next().unwrap())
+        data.iter().map(|byte| *byte)
     }
 }

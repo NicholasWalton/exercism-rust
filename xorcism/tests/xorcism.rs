@@ -41,7 +41,6 @@ fn munge_in_place_stateful() {
 }
 
 #[test]
-#[ignore]
 fn munge_identity() {
     let mut xs = Xorcism::new(&[0]);
     let data = "This is super-secret, cutting edge encryption, folks.";
@@ -89,7 +88,6 @@ macro_rules! test_cases {
                 use super::*;
 
                 #[test]
-                #[ignore]
                 fn munge_in_place() {
                     // we transform the input into a `Vec<u8>` despite its presence in this
                     // module because of the more restricted syntax that this function accepts
@@ -189,7 +187,6 @@ macro_rules! test_cases {
                 use super::*;
 
                 #[test]
-                #[ignore]
                 fn munge_in_place() {
                     let mut input = INPUT.as_bytes().to_vec();
                     let original = input.clone();
