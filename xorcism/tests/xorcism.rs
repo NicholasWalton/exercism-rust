@@ -116,7 +116,6 @@ macro_rules! test_cases {
                 }
 
                 #[test]
-                #[ignore]
                 fn round_trip() {
                     let mut xorcism1 = Xorcism::new(KEY);
                     let mut xorcism2 = xorcism1.clone();
@@ -165,7 +164,6 @@ macro_rules! test_cases {
                 }
 
                 #[test]
-                #[ignore]
                 fn round_trip() {
                     let key = KEY.as_bytes();
                     let input = INPUT.as_bytes();
@@ -201,7 +199,6 @@ macro_rules! test_cases {
                 }
 
                 #[test]
-                #[ignore]
                 fn munges() {
                     let owned_input = INPUT.as_bytes().to_vec();
 
@@ -213,7 +210,6 @@ macro_rules! test_cases {
                 }
 
                 #[test]
-                #[ignore]
                 fn round_trip() {
                     let owned_input = INPUT.as_bytes().to_vec();
 

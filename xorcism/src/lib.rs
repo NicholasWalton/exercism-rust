@@ -1,3 +1,4 @@
+use std::borrow::Borrow;
 use std::iter::Cycle;
 use std::slice::Iter;
 
@@ -32,12 +33,11 @@ impl<'a> Xorcism<'a> {
     ///
     /// Should accept anything which has a cheap conversion to a byte iterator.
     /// Shouldn't matter whether the byte iterator's values are owned or borrowed.
-    pub fn munge<'b, Data: IntoIterator<Item = &'b u8> + 'b>(&'b mut self, data: Data) -> impl Iterator<Item = u8> + '_ {
-        // data.as_ref().to_owned().iter().map(move |byte: &u8| *byte ^ self.key.next().unwrap())
+    pub fn munge<'b, Data: IntoIterator<Item: Borrow<u8>> + 'b>(&'b mut self, data: Data) -> impl Iterator<Item = u8> + '_ {
         let mut key = self.key.clone();
         data.into_iter().map(move |byte| {
             let key_byte = key.next().unwrap();
-            *byte ^ key_byte
+            byte.borrow() ^ key_byte
         })
     }
 }
