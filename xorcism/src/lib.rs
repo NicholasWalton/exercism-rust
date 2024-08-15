@@ -16,7 +16,9 @@ impl<'a> Xorcism<'a> {
     ///
     /// Should accept anything which has a cheap conversion to a byte slice.
     pub fn new<Key: ?Sized + AsRef<[u8]>>(key: &'a Key) -> Xorcism<'a> {
-        Xorcism { key: key.as_ref().iter().cycle() }
+        Xorcism {
+            key: key.as_ref().iter().cycle(),
+        }
     }
 
     /// XOR each byte of the input buffer with a byte from the key.
@@ -36,11 +38,16 @@ impl<'a> Xorcism<'a> {
     ///
     /// Should accept anything which has a cheap conversion to a byte iterator.
     /// Shouldn't matter whether the byte iterator's values are owned or borrowed.
-    pub fn munge<'b, Data: IntoIterator<Item: Borrow<u8>> + 'b>(&'b mut self, data: Data) -> impl Iterator<Item = u8> + 'b + Captures<'a>
-    where 'a: 'b {
+    pub fn munge<'b, Data: IntoIterator<Item: Borrow<u8>> + 'b>(
+        &'b mut self,
+        data: Data,
+    ) -> impl Iterator<Item = u8> + 'b + Captures<'a>
+    where
+        'a: 'b,
+    {
         let mut key = self.key.clone();
-        data.into_iter().zip(self.key.by_ref()).map(|(byte, key_byte)| {
-            byte.borrow() ^ key_byte
-        })
+        data.into_iter()
+            .zip(self.key.by_ref())
+            .map(|(byte, key_byte)| byte.borrow() ^ key_byte)
     }
 }
