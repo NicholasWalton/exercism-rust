@@ -2,6 +2,9 @@ use std::borrow::Borrow;
 use std::iter::Cycle;
 use std::slice::Iter;
 
+pub trait Captures<'a> {}
+impl<'a, T> Captures<'a> for T {}
+
 /// A munger which XORs a key with some data
 #[derive(Clone)]
 pub struct Xorcism<'a> {
@@ -33,10 +36,10 @@ impl<'a> Xorcism<'a> {
     ///
     /// Should accept anything which has a cheap conversion to a byte iterator.
     /// Shouldn't matter whether the byte iterator's values are owned or borrowed.
-    pub fn munge<'b, Data: IntoIterator<Item: Borrow<u8>> + 'b>(&'b mut self, data: Data) -> impl Iterator<Item = u8> + '_ {
+    pub fn munge<'b, Data: IntoIterator<Item: Borrow<u8>> + 'b>(&'b mut self, data: Data) -> impl Iterator<Item = u8> + 'b + Captures<'a>
+    where 'a: 'b {
         let mut key = self.key.clone();
-        data.into_iter().map(move |byte| {
-            let key_byte = key.next().unwrap();
+        data.into_iter().zip(self.key.by_ref()).map(|(byte, key_byte)| {
             byte.borrow() ^ key_byte
         })
     }
