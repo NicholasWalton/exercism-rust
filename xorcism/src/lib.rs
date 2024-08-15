@@ -15,7 +15,7 @@ impl<'a> Xorcism<'a> {
     /// Create a new Xorcism munger from a key
     ///
     /// Should accept anything which has a cheap conversion to a byte slice.
-    pub fn new<Key: ?Sized + AsRef<[u8]>>(key: &'a Key) -> Xorcism<'a> {
+    pub fn new<Key: ?Sized + AsRef<[u8]>>(key: &'a Key) -> Self {
         Xorcism {
             key: key.as_ref().iter().cycle(),
         }
@@ -25,9 +25,12 @@ impl<'a> Xorcism<'a> {
     ///
     /// Note that this is stateful: repeated calls are likely to produce different results,
     /// even with identical inputs.
+    ///
+    /// # Panics
+    /// Would panic if key is exhausted, but key is a Cycle
     pub fn munge_in_place(&mut self, data: &mut [u8]) {
         for byte in data {
-            *byte = *byte ^ self.key.next().unwrap();
+            *byte ^= self.key.next().expect("key is a Cycle");
         }
     }
 
