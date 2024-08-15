@@ -45,7 +45,6 @@ impl<'a> Xorcism<'a> {
     where
         'a: 'b,
     {
-        let mut key = self.key.clone();
         data.into_iter()
             .zip(self.key.by_ref())
             .map(|(byte, key_byte)| byte.borrow() ^ key_byte)
